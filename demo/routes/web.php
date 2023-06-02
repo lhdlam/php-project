@@ -5,6 +5,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\DashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +18,11 @@ use App\Http\Controllers\Admin\ProductsController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('/', function(){
+    return '<h2>Trang chu</h2>';
+})->name('home');
+
+
 // Client Routes
 Route::prefix('categories')->group(function(){
     //get
@@ -38,6 +45,7 @@ Route::prefix('categories')->group(function(){
 });
 
 // Client Routes
-Route::prefix('admin')->group(function(){
+Route::prefix('admin')->middleware('checkloginadmin')->group(function(){
+    Route::get('/', [DashboardController::class, 'index']);
     Route::resource('products', ProductsController::class);
 });

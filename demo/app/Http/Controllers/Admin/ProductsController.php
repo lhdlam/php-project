@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class ProductsController extends Controller
 {
+
+    public function __contruct(){
+        //use session check login
+    }
+    
     /**
      * Display a listing of the resource.
      */
